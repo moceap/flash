@@ -1,55 +1,63 @@
-Name: ojuba-flash
+Name: flash
 Version: 23.0.0.207
 Release: 1%{?dist}
-Summary: Adobe Flash Player for Ojuba
-Summary(ar): أدوبي فلاش بلير لأعجوبة
+Summary: Flash plugin importer
+Summary(ar): مستورد إضافة فلاش
 License: Commerical
-URL: https://github.com/ojuba-org/ojuba-flash
-Source: README.md
+URL: https://github.com/moceap/flash
+Source0: README.md
 Obsoletes: flash-plugin
 Provides: flash-plugin
 Requires: freshplayerplugin
 
 %description
-Adobe Flash Player for Ojuba.
+Importing Flash plugin from Adobe as Pepper to Firefox and Chromium and others.
 
 Flash player is regestered mark of Adobe.
 
 %description -l ar
-أدوبي فلاش بلير لأعجوبة.
+جلب إضافة فلاش من كإضافة بيبر لاستخدامها في فيرفكس وكروميوم وغيرهما.
 
 فلاش بلير علامة مسجلة لأدوبي.
+%prep
+cp -p %{SOURCE0} %{_builddir}
+
 %post
 %ifarch %{ix86}
-if [ -e /tmp/ojuba-flash ]
-then rm -rf /tmp/ojuba-flash
+if [ -e /tmp/flash ]
+then rm -rf /tmp/flash
 fi
-mkdir /tmp/ojuba-flash
-wget -O /tmp/ojuba-flash/flash_player_ppapi_linux.i386.tar.gz https://fpdownload.adobe.com/pub/flashplayer/pdc/%{version}/flash_player_ppapi_linux.i386.tar.gz
-pushd /tmp/ojuba-flash
+mkdir /tmp/flash
+wget -O /tmp/flash/flash_player_ppapi_linux.i386.tar.gz https://fpdownload.adobe.com/pub/flashplayer/pdc/%{version}/flash_player_ppapi_linux.i386.tar.gz
+pushd /tmp/flash
 tar -zxvf flash_player_ppapi_linux.i386.tar.gz
 mkdir -p %{_libdir}/chromium-browser/PepperFlash
+mkdir -p %{_datadir}/licenses/flash
 cp -p libpepflashplayer.so manifest.json %{_libdir}/chromium-browser/PepperFlash
+cp -pr README LGPL %{_datadir}/licenses/flash
 popd
-rm -rf /tmp/ojuba-flash
+rm -rf /tmp/flash
 %endif
 %ifarch x86_64
-if [ -e /tmp/ojuba-flash ]
-then rm -rf /tmp/ojuba-flash
+if [ -e /tmp/flash ]
+then rm -rf /tmp/flash
 fi
-mkdir /tmp/ojuba-flash
-wget -O /tmp/ojuba-flash/flash_player_ppapi_linux.x86_64.tar.gz https://fpdownload.adobe.com/pub/flashplayer/pdc/%{version}
-pushd /tmp/ojuba-flash
+mkdir /tmp/flash
+wget -O /tmp/flash/flash_player_ppapi_linux.x86_64.tar.gz https://fpdownload.adobe.com/pub/flashplayer/pdc/%{version}/flash_player_ppapi_linux.x86_64.tar.gz
+pushd /tmp/flash
 tar -zxvf flash_player_ppapi_linux.x86_64.tar.gz
 mkdir -p %{_libdir}/chromium-browser/PepperFlash
+mkdir -p %{_datadir}/licenses/flash
 cp -p libpepflashplayer.so manifest.json %{_libdir}/chromium-browser/PepperFlash
+cp -pr README LGPL %{_datadir}/licenses/flash
 popd
-rm -rf /tmp/ojuba-flash
+rm -rf /tmp/flash
 %endif
 
 %postun
 rm %{_libdir}/chromium-browser/PepperFlash/manifest.json
 rm %{_libdir}/chromium-browser/PepperFlash/libpepflashplayer.so
+rm -rf %{_datadir}/licenses/flash
 
 %files
 %doc README.md
