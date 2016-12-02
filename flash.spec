@@ -1,6 +1,6 @@
 Name: flash
 Version: 23.0.0.207
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Flash plugin importer
 Summary(ar): مستورد إضافة فلاش
 License: Commerical
@@ -9,6 +9,7 @@ Source0: README.md
 Obsoletes: flash-plugin
 Provides: flash-plugin
 Requires: freshplayerplugin
+Requires: wget
 
 %description
 Importing Flash plugin from Adobe as Pepper to Firefox and Chromium and others.
@@ -63,5 +64,8 @@ rm -rf %{_datadir}/licenses/flash
 %doc README.md
 
 %changelog
+* Sat Nov 26 2016 Mosaab Alzoubi <moceap@hotmail.com> - 23.0.0.207-2
+- Add wget as require
+
 * Sat Nov 26 2016 Mosaab Alzoubi <moceap@hotmail.com> - 23.0.0.207-1
 - TEST build
