@@ -1,5 +1,5 @@
 Name: flash
-Version: 23.0.0.207
+Version: 24.0.0.186
 Release: 2%{?dist}
 Summary: Flash plugin importer
 Summary(ar): مستورد إضافة فلاش
@@ -9,7 +9,6 @@ Source0: README.md
 Obsoletes: flash-plugin
 Provides: flash-plugin
 Requires: freshplayerplugin
-Requires: wget
 
 %description
 Importing Flash plugin from Adobe as Pepper to Firefox and Chromium and others.
@@ -35,7 +34,7 @@ tar -zxvf flash_player_ppapi_linux.i386.tar.gz
 mkdir -p %{_libdir}/chromium-browser/PepperFlash
 mkdir -p %{_datadir}/licenses/flash
 cp -p libpepflashplayer.so manifest.json %{_libdir}/chromium-browser/PepperFlash
-cp -pr README LGPL %{_datadir}/licenses/flash
+cp -pr readme.txt license.pdf LGPL %{_datadir}/licenses/flash
 popd
 rm -rf /tmp/flash
 %endif
@@ -50,22 +49,27 @@ tar -zxvf flash_player_ppapi_linux.x86_64.tar.gz
 mkdir -p %{_libdir}/chromium-browser/PepperFlash
 mkdir -p %{_datadir}/licenses/flash
 cp -p libpepflashplayer.so manifest.json %{_libdir}/chromium-browser/PepperFlash
-cp -pr README LGPL %{_datadir}/licenses/flash
+cp -pr readme.txt license.pdf LGPL %{_datadir}/licenses/flash
 popd
 rm -rf /tmp/flash
 %endif
 
-%postun
+%preun
+if [ $1 = 0 ] ; then
 rm %{_libdir}/chromium-browser/PepperFlash/manifest.json
 rm %{_libdir}/chromium-browser/PepperFlash/libpepflashplayer.so
 rm -rf %{_datadir}/licenses/flash
+fi
 
 %files
 %doc README.md
 
 %changelog
-* Sat Nov 26 2016 Mosaab Alzoubi <moceap@hotmail.com> - 23.0.0.207-2
-- Add wget as require
+* Sun Dec 18 2016 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.186-2
+- Fix unstart after updating
+
+* Fri Dec 16 2016 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.186-1
+- Updated to 24.0.0.186
 
 * Sat Nov 26 2016 Mosaab Alzoubi <moceap@hotmail.com> - 23.0.0.207-1
 - TEST build
