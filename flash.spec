@@ -9,6 +9,7 @@ Source0: README.md
 Obsoletes: flash-plugin
 Provides: flash-plugin
 Requires: freshplayerplugin
+Requires: wget
 
 %description
 Importing Flash plugin from Adobe as Pepper to Firefox and Chromium and others.
@@ -67,6 +68,7 @@ fi
 %changelog
 * Sun Dec 18 2016 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.186-2
 - Fix unstart after updating
+- Add wget as require
 
 * Fri Dec 16 2016 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.186-1
 - Updated to 24.0.0.186
