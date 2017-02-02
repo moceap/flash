@@ -1,6 +1,6 @@
 Name: flash
-Version: 24.0.0.186
-Release: 2%{?dist}
+Version: 24.0.0.194
+Release: 1%{?dist}
 Summary: Flash plugin importer
 Summary(ar): مستورد إضافة فلاش
 License: Commerical
@@ -66,6 +66,9 @@ fi
 %doc README.md
 
 %changelog
+* Fri Feb 3 2017 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.194-1
+- Updated to 24.0.0.194
+
 * Sun Dec 18 2016 Mosaab Alzoubi <moceap@hotmail.com> - 24.0.0.186-2
 - Fix unstart after updating
 - Add wget as require
